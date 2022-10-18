@@ -5,3 +5,5 @@ TOKEN = config('TOKEN')
 
 bot = Bot(TOKEN)
 dp = Dispatcher(bot=bot)
+
+ADMIN = [5037805311, ]
