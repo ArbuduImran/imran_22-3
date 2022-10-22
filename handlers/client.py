@@ -1,8 +1,7 @@
-
-
 from aiogram import types, Dispatcher
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from config import bot, dp
+from database.bot_db import sql_command_random
 
 
 async def start_command(message: types.Message):
@@ -10,7 +9,9 @@ async def start_command(message: types.Message):
                                                  f'"/quiz" - викторина из нескольких вопросов\n'
                                                  f'"/mem" - отправляет прикольные картирки\n'
                                                  f'"/mem2" - отпровляет еще одно фото\n'
-                                                 f'"game - отправляет эмоджи"'
+                                                 f'"game - отправляет эмоджи"\n'
+                                                 f'"/dice - игра против бота"\n'
+                                                 f'"/reg - анкета"'
                            )
 
 
@@ -59,7 +60,13 @@ async def pin(message: types.Message):
         await message.answer('вы должны отвечать на сообщение')
 
 
+async def get_random_mentor(message: types.Message):
+    await sql_command_random(message)
+
+
 def register_handlers_client(dp: Dispatcher):
+    dp.register_message_handler(get_random_mentor, commands=['get'])
     dp.register_message_handler(start_command, commands=['start', 'info'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
+    dp.register_message_handler(mems, commands=['mem'])
     dp.register_message_handler(pin, commands=['pin'], commands_prefix='!')
