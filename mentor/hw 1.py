@@ -1,15 +1,23 @@
-ten = list(range(1, 11))
-evens = list(filter(lambda i: i % 2 == 0, ten))
-evens1 = list(map(lambda i: i ** 2, evens))
+attempts = []
+counter = 0
+left = 1
+right = 100
+while True:
+    middle = int((left + right) / 2)
+    answer = input(f'ваше число {middle}? ')
+    answer = answer.lower()
+    attempts.append(middle)
+    counter += 1
+    if answer == 'да':
+        left = middle
+        right = middle
+        break
+    elif answer == 'больше':
+        left = middle + 1
+    elif answer == 'меньше':
+        right = middle - 1
+    else:
+        print('Неправильная комманда')
 
-print(evens1)
-def function(lst=(list(ten))):
-    while True:
-        index = input("Введите индекс для вывода объекта из списка:")
-        if index.lower() == 'exit' or index.lower() == 'Выход':
-            break
-        try:
-                print(lst[int(index)])
-        except:
-                print('Неверный индекс или данного индекса не существует')
-function()
+with open('result.txt', 'w') as file:
+    file.write(f'{counter}, {attempts}, {left}')
