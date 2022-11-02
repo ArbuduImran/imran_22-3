@@ -3,7 +3,7 @@ import asyncio
 from aiogram.utils import executor
 from config import dp
 import logging
-from handlers import client, callback, extra, admin, fsm_mentor, notifications
+from handlers import client, callback, extra, admin, fsm_mentor, notifications, inline
 from database.bot_db import sql_create
 
 
@@ -11,7 +11,7 @@ async def on_startup(_):
     asyncio.create_task(notifications.scheduler())
     sql_create()
 
-
+inline.inline_gogo_handler(dp)
 client.register_handlers_client(dp)
 admin.register_handlers_ADMIN(dp)
 callback.callback_query_handler(dp)
