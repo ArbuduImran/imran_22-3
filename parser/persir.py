@@ -37,7 +37,7 @@ def parser():
     if html.status_code == 200:
         answers = []
         for i in range(1, 2):
-            html = get_html(URL+f"page1_{i}.php")
+            html = get_html(URL + f"page1_{i}.php")
             current_page = get_data(html.text)
             answers.extend(current_page)
         return answers
